@@ -83,7 +83,7 @@ if __name__ == '__main__':
 	final_song=final_song2[2].text
 	final_song=int(final_song)
 
-	for page in range(1,final_page):
+	for page in range(0,final_page):
 		req = requests.get('https://freemusicarchive.org/genre/{}/?sort=track_date_published&d=1&page={}&per_page=200'.format(genre, page))
 		source = req.text
 		html = BeautifulSoup(source, 'lxml')
