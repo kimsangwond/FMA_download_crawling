@@ -32,18 +32,17 @@ def fma_Crawling(html):
 	genre_list = []
 
 	for div in div_list :
-		global count
-		count=0
-		count +=1
-		print(count)
 		artist = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-artist'}).text
 		track = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-track'}).text
 		album = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-album'}).text
 		genre = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-genre'}).text
-		#artist
+		artist_list.append([artist.strip()])
+		track_list.append([track.strip()])
+		album_list.append([album.strip()])
+		genre_list.append([genre.strip()])
 
-		for i in range(1,200) :
-			temp_dict[str(i)]={'artist':artist, 'track':track, 'album':album, 'genre':genre}
+		for i in range(1,final_song) :
+			temp_dict[str(i)]={'artist':str(artist[i]), 'track':str(track[i]), 'album':str(album[i]), 'genre':str(genre[i])}
 
 	return temp_dict
 
@@ -61,6 +60,10 @@ html2 = BeautifulSoup(source1, 'lxml')
 final_page2=html2.select('a[href^="https://freemusicarchive.org/genre/{}/?sort=track_date_published&d=1&page="]'.format(genre))
 final_page=final_page2[6].text
 final_page=int(final_page)
+
+final_song2=html2.find('div', {'class': 'pagination-full'}).find_all("b")
+final_song=final_song2[2].text
+final_song=int(final_song)
 
 for page in range(1,final_page):
 	req = requests.get('https://freemusicarchive.org/genre/{}/?sort=track_date_published&d=1&page={}&per_page=200'.format(genre, page))

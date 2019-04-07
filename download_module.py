@@ -81,7 +81,7 @@ if __name__ == '__main__':
 		fma_download_list += fma_Download(html)
 		fma_list += fma_Crawling(html)
 
-	for sang in range(1, final_song):
+	for sang in range(0, final_song):
 		url=" ".join(fma_download_list[sang])
 		song_name1=fma_list[sang]
 		song_name=" ".join(fma_list[sang])
