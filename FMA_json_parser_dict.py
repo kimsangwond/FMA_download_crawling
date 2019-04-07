@@ -40,11 +40,10 @@ def fma_Crawling(html):
 		track_list.append(track.strip())
 		album_list.append(album.strip())
 		genre_list.append(genre.strip())
-		print(track_list)
-		print(type(str(artist.strip())))
+		print(len(track_list))
 
-	for i in range(1,200) :
-		temp_dict[str(i)]={'artist':str(artist[i]), 'track':str(track[i]), 'album':str(album[i]), 'genre':str(genre[i])}
+	for i in range(0,200) :
+		temp_dict[str(i+1)]={'artist':str(artist_list[i]), 'track':str(track_list[i]), 'album':str(album_list[i]), 'genre':str(genre_list[i])}
 
 	return temp_dict
 
