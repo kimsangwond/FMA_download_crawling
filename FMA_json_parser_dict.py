@@ -36,14 +36,14 @@ def fma_Crawling(html):
 		track = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-track'}).text
 		album = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-album'}).text
 		genre = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-genre'}).text
-		artist_list.append(str(artist.strip()))
-		track_list.append(str(track.strip()))
-		album_list.append(str(album.strip()))
-		genre_list.append(str(genre.strip()))
-		print(artist_list)
+		artist_list.append(artist.strip())
+		track_list.append(track.strip())
+		album_list.append(album.strip())
+		genre_list.append(genre.strip())
+		print(track_list)
 		print(type(str(artist.strip())))
 
-	for i in range(0,final_song) :
+	for i in range(1,200) :
 		temp_dict[str(i)]={'artist':str(artist[i]), 'track':str(track[i]), 'album':str(album[i]), 'genre':str(genre[i])}
 
 	return temp_dict
