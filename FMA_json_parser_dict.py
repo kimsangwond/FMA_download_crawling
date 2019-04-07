@@ -21,19 +21,27 @@ print('Rock')
 print('Soul-RB')
 print('Spoken')
 
-genre=input('input genere: ')
+genre=input('input genre: ')
 
 def fma_Crawling(html):
 	temp_dict = {}
 	div_list = html.find_all('div', {'class': 'play-item'})
+	artist_list = []
+	track_list = []
+	album_list = []
+	genre_list = []
 
 	for div in div_list :
-
+		global count
+		count=0
+		count +=1
+		print(count)
 		artist = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-artist'}).text
 		track = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-track'}).text
 		album = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-album'}).text
 		genre = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-genre'}).text
-		
+		#artist
+
 		for i in range(1,200) :
 			temp_dict[str(i)]={'artist':artist, 'track':track, 'album':album, 'genre':genre}
 
