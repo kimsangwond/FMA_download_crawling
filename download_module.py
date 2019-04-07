@@ -69,12 +69,10 @@ if __name__ == '__main__':
 	final_page2=html2.select('a[href^="https://freemusicarchive.org/genre/{}/?sort=track_date_published&d=1&page="]'.format(genre))
 	final_page=final_page2[6].text
 	final_page=int(final_page)
-	print(final_page)
 
 	final_song2=html2.find('div', {'class': 'pagination-full'}).find_all("b")
 	final_song=final_song2[2].text
 	final_song=int(final_song)
-	print(final_song)
 
 	for page in range(1,final_page):
 		req = requests.get('https://freemusicarchive.org/genre/{}/?sort=track_date_published&d=1&page={}&per_page=200'.format(genre, page))

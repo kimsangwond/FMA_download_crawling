@@ -22,7 +22,6 @@ print('Spoken')
 genre=input('input genere: ')
 download_track=input('input track name: ')
 download_track=str(download_track)
-print(download_track)
 
 def fma_Crawling(html):
 	tem_list = []
@@ -79,12 +78,10 @@ if __name__ == '__main__':
 	final_page2=html2.select('a[href^="https://freemusicarchive.org/genre/{}/?sort=track_date_published&d=1&page="]'.format(genre))
 	final_page=final_page2[6].text
 	final_page=int(final_page)
-	print(final_page)
 
 	final_song2=html2.find('div', {'class': 'pagination-full'}).find_all("b")
 	final_song=final_song2[2].text
 	final_song=int(final_song)
-	print(final_song)
 
 	for page in range(1,final_page):
 		req = requests.get('https://freemusicarchive.org/genre/{}/?sort=track_date_published&d=1&page={}&per_page=200'.format(genre, page))
@@ -94,9 +91,7 @@ if __name__ == '__main__':
 		fma_list += fma_Crawling(html)
 
 	#toJson(fma_list)
-	print(download_track)
 	song_name2= fma_list.index(download_track)
-	print(song_name2)
 	url=" ".join(fma_download_list[song_name2])
 	song_name=fma_list[song_name2]
 	#song_name=" ".join(fma_list[song_name2])

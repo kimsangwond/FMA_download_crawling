@@ -50,19 +50,14 @@ html2 = BeautifulSoup(source1, 'lxml')
 final_page2=html2.select('a[href^="https://freemusicarchive.org/genre/{}/?sort=track_date_published&d=1&page="]'.format(genre))
 final_page=final_page2[6].text
 final_page=int(final_page)
-print(final_page)
 
 for page in range(1,final_page):
-	print(page)
 	req = requests.get('https://freemusicarchive.org/genre/{}/?sort=track_date_published&d=1&page={}&per_page=200'.format(genre, page))
 	source = req.text
 	html = BeautifulSoup(source, 'lxml')
 	fma_list += fma_Crawling(html)
 
-
-#final_page1=html.find_all('div', {'class':'pagination-full'})
-
-for item in fma_list :
-	print(item)
+#for item in fma_list :
+#	print(item)
 
 toJson(fma_list)
