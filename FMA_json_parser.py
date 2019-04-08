@@ -51,7 +51,7 @@ final_page2=html2.select('a[href^="https://freemusicarchive.org/genre/{}/?sort=t
 final_page=final_page2[6].text
 final_page=int(final_page)
 
-for page in range(1,final_page):
+for page in range(1,final_page+1):
 	req = requests.get('https://freemusicarchive.org/genre/{}/?sort=track_date_published&d=1&page={}&per_page=200'.format(genre, page))
 	source = req.text
 	html = BeautifulSoup(source, 'lxml')

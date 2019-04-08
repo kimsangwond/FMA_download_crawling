@@ -23,27 +23,44 @@ print('Spoken')
 
 genre=input('input genre: ')
 
-def fma_Crawling(html):
+def fma_Crawling(html, page):
 	temp_dict = {}
 	div_list = html.find_all('div', {'class': 'play-item'})
 	artist_list = []
 	track_list = []
 	album_list = []
 	genre_list = []
+	i=(page-1)*200-1
+	print(page)
+	print(i)
+	'''
+	if page==final_page:
+		i=(page-1)*200-1
+			artist = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-artist'}).text
+			track = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-track'}).text
+			album = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-album'}).text
+			genre = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-genre'}).text
+			print(i)
+			temp_dict[str(i+1)]={'artist':str(artist), 'track':str(track), 'album':str(album), 'genre':str(genre)}
+
+	else 
+		for div in div_list :
+			i=i+1
+			artist = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-artist'}).text
+			track = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-track'}).text
+			album = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-album'}).text
+			genre = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-genre'}).text
+			print(i)
+			temp_dict[str(i+1)]={'artist':str(artist), 'track':str(track), 'album':str(album), 'genre':str(genre)}
+	'''
 
 	for div in div_list :
+		i=i+1
 		artist = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-artist'}).text
 		track = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-track'}).text
 		album = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-album'}).text
 		genre = div.find('div',{'class':'playtxt'}).find('span',{'class':'ptxt-genre'}).text
-		artist_list.append(artist.strip())
-		track_list.append(track.strip())
-		album_list.append(album.strip())
-		genre_list.append(genre.strip())
-		print(len(track_list))
-
-	for i in range(0,200) :
-		temp_dict[str(i+1)]={'artist':str(artist_list[i]), 'track':str(track_list[i]), 'album':str(album_list[i]), 'genre':str(genre_list[i])}
+		temp_dict[str(i+1)]={'artist':str(artist), 'track':str(track), 'album':str(album), 'genre':str(genre)}
 
 	return temp_dict
 
@@ -65,14 +82,15 @@ final_page=int(final_page)
 final_song2=html2.find('div', {'class': 'pagination-full'}).find_all("b")
 final_song=final_song2[2].text
 final_song=int(final_song)
+print(final_page)
 
-for page in range(1,final_page):
+for page in range(1,final_page+1):
 	req = requests.get('https://freemusicarchive.org/genre/{}/?sort=track_date_published&d=1&page={}&per_page=200'.format(genre, page))
 	source = req.text
+	print(page)
 	html = BeautifulSoup(source, 'lxml')
-
 	#fma_temp = fma_Crawling(html)
-	fma_dict = dict(fma_dict, **fma_Crawling(html))
+	fma_dict = dict(fma_dict, **fma_Crawling(html,page))
 
 #for item in fma_list :
 #	print(item)
